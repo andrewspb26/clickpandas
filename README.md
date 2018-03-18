@@ -6,9 +6,9 @@ Written as wrapper around infi.clickhouse_orm
 MAIN FEATURES:
 
 - very simple interface for execute queries
-- supporting parallel execution of simple queries
-- supporting out-of-memory dataframes using dask
-- supporting inserts to clickhouse table
+- supports parallel execution of simple queries
+- supports out-of-memory dataframes using dask
+- supports inserts to clickhouse table
 
 HOW TO USE:
 
