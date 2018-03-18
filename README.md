@@ -17,30 +17,30 @@ db_name (database name), db_url (clickhouse url), username, password
 
 2) Write simple wrapper around query:
 
-   def get_count_rows(start, end):
-       sql = "select count(*) from some_table where reg_time > '{0}'' and reg_time < '{1}'"
-       return sql.format(start, end)
+       def get_count_rows(start, end):
+           sql = "select count(*) from some_table where reg_time > '{0}'' and reg_time < '{1}'"
+           return sql.format(start, end)
 
 3) Write the following:
   
-  connection = clickpandas("/directory_with_config")
-  res = connection.execute_query(get_count_rows, start='2018-01-01 00:00:01', end='2018-02-01 00:00:01')
+      connection = clickpandas("/directory_with_config")
+      res = connection.execute_query(get_count_rows, start='2018-01-01 00:00:01', end='2018-02-01 00:00:01')
   
-  res will be pd.DataFrame
+      res will be pd.DataFrame
   
 4) To execute this query in parallel write the following*:
 
-  res = connection.parallel_execute(get_count_rows, n_splits=4, start='-//-', end='-//-')
+      res = connection.parallel_execute(get_count_rows, n_splits=4, start='-//-', end='-//-')
   
-  Where n_splits is number of proccesses (default value 2)
+      Where n_splits is number of proccesses (default value 2)
   
-  res will be pd.DataFrame
+      res will be pd.DataFrame
   
 5) To retrive large amount of data (which is obviously bigger than RAM) write the following**:
   
-  res = connection.out_of_core_execute('reg_time', get_count_rows, start='-//-', end='-//-')
+      res = connection.out_of_core_execute('reg_time', get_count_rows, start='-//-', end='-//-')
   
-  res will be dd.DataFrame***
+      res will be dd.DataFrame***
   
  
 -------------------------------------------------------------------------------------
