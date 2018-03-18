@@ -40,21 +40,20 @@ db_name (database name), db_url (clickhouse url), username, password
   
 5) To retrive large amount of data (which is obviously bigger than RAM) write the following**:
 
-     
-      res = connection.out_of_core_execute('reg_time', get_count_rows, start='-//-', end='-//-')
+       res = connection.out_of_core_execute('reg_time', get_count_rows, start='-//-', end='-//-')
   
      
-     res will be dd.DataFrame***
+      res will be dd.DataFrame***
   
  
 -------------------------------------------------------------------------------------
 
 NOTES:
 
-* parallel_execute() method splits query into n_splits queries by datetime field (in our example - reg_time) 
+(*) parallel_execute() method splits query into n_splits queries by datetime field (in our example - reg_time) 
   and executes them simultaneously. In future we will support other splitting fields.
 
-** out_of_core_execute() method can handle queries from single table and not supports joins
+(**) out_of_core_execute() method can handle queries from single table and not supports joins
 
-*** dask dataframe will be replaced in future by our out-of-RAM dataframe implementation due to limitations
+(***) dask dataframe will be replaced in future by our out-of-RAM dataframe implementation due to limitations
     of dask read_sql_table method.
